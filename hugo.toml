@@ -1,0 +1,9 @@
+baseURL = "https://kidclone3.github.io/decap-hugo-demo/"
+languageCode = "en-us"
+title = "Decap + Hugo Demo"
+
+[params]
+  description = "A minimal Hugo site managed by Decap CMS."
+
+[markup.goldmark.renderer]
+  unsafe = true

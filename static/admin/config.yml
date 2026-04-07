@@ -1,0 +1,39 @@
+# Decap CMS configuration.
+# Docs: https://decapcms.org/docs/configuration-options/
+
+backend:
+  name: github
+  repo: kidclone3/decap-hugo-demo
+  branch: main                      # protected branch CI deploys from
+  # Uses Decap's hosted OAuth by default. To self-host, set:
+  # base_url: https://your-oauth-proxy.example.com
+
+# Editorial workflow = Decap opens a PR for every edit instead of
+# committing straight to `main`. Editors move drafts through
+# draft -> in_review -> ready, and "Publish" merges the PR.
+publish_mode: editorial_workflow
+
+# Where uploaded media is stored in the repo, and the URL it resolves to
+# in the rendered Hugo site.
+media_folder: "static/uploads"
+public_folder: "/uploads"
+
+# Show a "Preview" link in the editor that points to your deploy preview.
+# site_url: https://your-site.example.com
+# display_url: https://your-site.example.com
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { name: "title",       label: "Title",       widget: "string" }
+      - { name: "date",        label: "Date",        widget: "datetime" }
+      - { name: "draft",       label: "Draft",       widget: "boolean", default: false }
+      - { name: "tags",        label: "Tags",        widget: "list", required: false }
+      - { name: "description", label: "Description", widget: "text",  required: false }
+      - { name: "body",        label: "Body",        widget: "markdown" }

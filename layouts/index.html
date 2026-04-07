@@ -1,0 +1,14 @@
+{{ define "main" }}
+<h1>{{ .Site.Title }}</h1>
+<p>{{ .Site.Params.description }}</p>
+
+<h2>Latest posts</h2>
+<ul class="posts">
+  {{ range first 10 (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <span class="meta">— {{ .Date.Format "Jan 2, 2006" }}</span>
+    </li>
+  {{ end }}
+</ul>
+{{ end }}
