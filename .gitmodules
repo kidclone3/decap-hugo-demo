@@ -1,0 +1,3 @@
+[submodule ".claude/agents/frontend-agents"]
+	path = .claude/agents/frontend-agents
+	url = https://github.com/tex-corver/frontend-agents.git
