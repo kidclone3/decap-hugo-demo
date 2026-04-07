@@ -1,9 +1,42 @@
 {{ define "main" }}
-<article>
-  <header>
-    <h1>{{ .Title }}</h1>
-    <p class="meta">{{ .Date.Format "January 2, 2006" }}{{ with .Params.tags }} · {{ delimit . ", " }}{{ end }}</p>
+<article class="article">
+  <header class="article__header">
+    {{ with .Section }}<span class="article__eyebrow">{{ . }}</span>{{ end }}
+    <h1 class="article__title">{{ .Title }}</h1>
+    <div class="article__meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      {{ with .ReadingTime }}<span class="dot">·</span><span>{{ . }} min read</span>{{ end }}
+      {{ with .WordCount }}<span class="dot">·</span><span>{{ . }} words</span>{{ end }}
+    </div>
   </header>
-  {{ .Content }}
+
+  <div class="article__body">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.tags }}
+    <ul class="tags" style="margin-top: var(--space-l);">
+      {{ range . }}
+        <li><a class="tag" href="{{ "/tags/" | relURL }}{{ . | urlize }}/">#{{ . }}</a></li>
+      {{ end }}
+    </ul>
+  {{ end }}
+
+  {{ if or .PrevInSection .NextInSection }}
+    <nav class="post-nav" aria-label="Post navigation">
+      {{ with .PrevInSection }}
+        <a href="{{ .RelPermalink }}" class="prev" rel="prev">
+          <span class="post-nav__label">← Previous</span>
+          <span class="post-nav__title">{{ .Title }}</span>
+        </a>
+      {{ else }}<span></span>{{ end }}
+      {{ with .NextInSection }}
+        <a href="{{ .RelPermalink }}" class="next" rel="next">
+          <span class="post-nav__label">Next →</span>
+          <span class="post-nav__title">{{ .Title }}</span>
+        </a>
+      {{ else }}<span></span>{{ end }}
+    </nav>
+  {{ end }}
 </article>
 {{ end }}

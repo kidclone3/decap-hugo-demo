@@ -1,0 +1,10 @@
+<li class="post-card">
+  <p class="post-card__meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+    {{ with .ReadingTime }} · {{ . }} min read{{ end }}
+  </p>
+  <h3 class="post-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  {{ with (or .Description .Summary) }}
+    <p class="post-card__excerpt">{{ . | plainify }}</p>
+  {{ end }}
+</li>

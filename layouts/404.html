@@ -1,0 +1,11 @@
+{{ define "main" }}
+<section class="not-found">
+  <p class="not-found__code">404</p>
+  <h1>This page wandered off.</h1>
+  <p>The URL you followed doesn't exist (anymore). Try the homepage or browse the latest posts.</p>
+  <p style="margin-top: var(--space-l);">
+    <a class="tag" href="{{ "/" | relURL }}">← Home</a>
+    <a class="tag" href="{{ "/posts/" | relURL }}">All posts</a>
+  </p>
+</section>
+{{ end }}

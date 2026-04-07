@@ -1,14 +1,18 @@
 {{ define "main" }}
-<h1>{{ .Site.Title }}</h1>
-<p>{{ .Site.Params.description }}</p>
+<section class="hero">
+  <span class="hero__eyebrow">Decap CMS · Hugo · GitHub Pages</span>
+  <h1>{{ .Site.Title }}</h1>
+  <p>{{ .Site.Params.tagline | default .Site.Params.description }}</p>
+</section>
 
-<h2>Latest posts</h2>
-<ul class="posts">
-  {{ range first 10 (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
-    <li>
-      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-      <span class="meta">— {{ .Date.Format "Jan 2, 2006" }}</span>
-    </li>
+<div class="section-head">
+  <h2>Latest writing</h2>
+  <a href="{{ "/posts/" | relURL }}">All posts →</a>
+</div>
+
+<ul class="post-grid">
+  {{ range first 6 (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+    {{ partial "post-card.html" . }}
   {{ end }}
 </ul>
 {{ end }}

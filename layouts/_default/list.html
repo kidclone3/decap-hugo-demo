@@ -1,11 +1,13 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-<ul class="posts">
+<header class="hero">
+  <span class="hero__eyebrow">{{ .Kind }}</span>
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p>{{ . }}</p>{{ end }}
+</header>
+
+<ul class="post-grid">
   {{ range .Pages.ByDate.Reverse }}
-    <li>
-      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-      <span class="meta">— {{ .Date.Format "Jan 2, 2006" }}</span>
-    </li>
+    {{ partial "post-card.html" . }}
   {{ end }}
 </ul>
 {{ end }}

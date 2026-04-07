@@ -1,9 +1,31 @@
 baseURL = "https://kidclone3.github.io/decap-hugo-demo/"
 languageCode = "en-us"
 title = "Decap + Hugo Demo"
+enableRobotsTXT = true
+enableGitInfo = false
+
+# Generate RSS for the homepage and sections.
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
 
 [params]
-  description = "A minimal Hugo site managed by Decap CMS."
+  description = "A small editorial blog rendered by Hugo and edited through Decap CMS."
+  author = "kidclone3"
+  tagline = "A demo of Git-backed publishing — Decap CMS edits markdown, Hugo renders it, GitHub Actions ships it."
+  themeColor = "#b14820"
 
-[markup.goldmark.renderer]
-  unsafe = true
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+  [markup.highlight]
+    style = "github"
+    noClasses = false
+    lineNos = false
+    tabWidth = 2
+
+[taxonomies]
+  tag = "tags"
