@@ -28,7 +28,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive   # for Hugo themes added as submodules
+          # `.claude/agents/frontend-agents` is a private submodule that the
+          # runner's GITHUB_TOKEN can't clone — and Hugo doesn't need it anyway.
+          # If you ever add a *public* theme submodule, switch this to `recursive`.
+          submodules: false
           fetch-depth: 0          # needed for .GitInfo / .Lastmod
 
       - name: Install Hugo (extended)
